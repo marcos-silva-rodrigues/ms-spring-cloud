@@ -3,6 +3,7 @@ package com.rodrigues.silva.marcos.hrpayrool.resources;
 import com.rodrigues.silva.marcos.hrpayrool.entities.Payment;
 import com.rodrigues.silva.marcos.hrpayrool.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
