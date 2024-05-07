@@ -1,9 +1,11 @@
 package com.rodrigues.silva.marcos.hrpayrool.services;
 
+import com.rodrigues.silva.marcos.hrpayrool.clients.WorkerFeignClient;
 import com.rodrigues.silva.marcos.hrpayrool.entities.Payment;
 import com.rodrigues.silva.marcos.hrpayrool.entities.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,16 +16,26 @@ import java.util.Map;
 public class PaymentService {
 
   @Autowired
-  private RestTemplate restTemplate;
+  private WorkerFeignClient workerFeignClient;
 
-  @Value("${h2-worker.host}")
-  private String workerHost;
+//  @Autowired
+//  private RestTemplate restTemplate;
+
+//  @Value("${h2-worker.host}")
+//  private String workerHost;
+
+//  public Payment getPayment(long workerId, int days) {
+//    Map<String, String> uriVariable = new HashMap<>();
+//    uriVariable.put("id", String.valueOf(workerId));
+//    String url = workerHost + "/workers/{id}";
+//    Worker worker = restTemplate.getForObject(url, Worker.class, uriVariable);
+//
+//    return new Payment(worker.getName(), worker.getDailyIncome(), days);
+//  }
 
   public Payment getPayment(long workerId, int days) {
-    Map<String, String> uriVariable = new HashMap<>();
-    uriVariable.put("id", String.valueOf(workerId));
-    String url = workerHost + "/workers/{id}";
-    Worker worker = restTemplate.getForObject(url, Worker.class, uriVariable);
+
+    Worker worker = workerFeignClient.findById(workerId).getBody();
 
     return new Payment(worker.getName(), worker.getDailyIncome(), days);
   }
