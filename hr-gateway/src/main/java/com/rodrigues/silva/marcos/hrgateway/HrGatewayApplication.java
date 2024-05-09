@@ -20,6 +20,8 @@ public class HrGatewayApplication {
 										.uri("lb://hr-worker"))
 						.route("payment", r -> r.path("/payments/**")
 										.uri("lb://hr-payrool"))
+						.route("user", r -> r.path("/users/**")
+										.uri("lb://hr-user"))
 						.build();
 	}
 
