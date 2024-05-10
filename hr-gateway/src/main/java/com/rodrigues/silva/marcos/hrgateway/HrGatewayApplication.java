@@ -22,6 +22,8 @@ public class HrGatewayApplication {
 										.uri("lb://hr-payrool"))
 						.route("user", r -> r.path("/users/**")
 										.uri("lb://hr-user"))
+						.route("oauth", r -> r.path("/oauth/**")
+										.uri("lb://hr-oauth"))
 						.build();
 	}
 
